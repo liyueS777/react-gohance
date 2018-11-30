@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './assets/css/index.css';//可以删点，组件引入就行
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

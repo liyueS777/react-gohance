@@ -1,0 +1,7 @@
+虚拟dom
+真实dom
+diff算法
+    -------------------
+    虚拟dom和真是dom区别，diff--difference
+    同层比对
+    key 尽量不要用index作为key
