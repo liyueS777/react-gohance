@@ -11,6 +11,7 @@ const UserAdd = asyncComponent(() => import("../components/user/UserAdd"));
 const UserList = asyncComponent(() => import("../components/user/UserList"));
 const UserDetail = asyncComponent(() => import("../components/user/UserDetail"));
 const TodoList = asyncComponent(() => import("../components/TodoList"));
+const TodoRedux = asyncComponent(() => import("../components/TodoListRedux"));
 
 
 
@@ -102,6 +103,13 @@ const routes = [
         component:TodoList,
         meta:{
             title:'TodoList'
+        }
+    },
+    {
+        path:'/todoRedux',
+        component:TodoRedux,
+        meta:{
+            title:'todoRedux'
         }
     },
     {
