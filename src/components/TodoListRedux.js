@@ -1,7 +1,8 @@
 import React from 'react';
 import { Input,Button,List  } from 'antd';
 import store from '../store/index'
-
+// import { CHANGE_INPUT_VALUE,ADD_TOFO_ITEM } from '../store/actionsType'
+import { changeInputValue,addTodoItem } from '../store/actionsCreators'
 class TodoRedux extends React.Component {
     constructor(props) {
         super(props);
@@ -15,11 +16,11 @@ class TodoRedux extends React.Component {
         this.state.r = store.getState()
     }
     changeInputValue = (e) => {
-        const action = {
-            type:"change_input_value",
-            value:e.target.value
-        }
-        store.dispatch(action)
+        // const action = {
+        //     type:CHANGE_INPUT_VALUE,
+        //     value:e.target.value
+        // }
+        store.dispatch(changeInputValue(e.target.value))
     }
     handleStoreChange = () => {
         console.log('store change');
@@ -28,11 +29,11 @@ class TodoRedux extends React.Component {
         })
     }
     search = ()=>{
-        const action = {
-            type:"add_todo_item",
-            value:this.state.r.inputValue
-        };
-        store.dispatch(action)
+        // const action = {
+        //     type:ADD_TOFO_ITEM,
+        //     value:this.state.r.inputValue
+        // };
+        store.dispatch(addTodoItem(this.state.r.inputValue))
     }
     render() {
         console.log(this.state.r)
