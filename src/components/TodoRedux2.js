@@ -2,7 +2,7 @@ import React from 'react';
 import { Radio,Select,Button,Switch } from 'antd';
 import store2 from '../store/index'
 // import { CHANGE_SELECT_VALUE } from '../store/actionsType'
-import { changeSelectItem,changeButtonSwitch } from '../store/actionsCreators'
+import { changeSelectItem,changeButtonSwitch,initSagaListData } from '../store/actionsCreators'
 import store from '../store/index';
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
@@ -97,11 +97,16 @@ class TodoRedux2 extends React.Component {
         })
         
     }
+    goSaga = () =>{
+        const action = initSagaListData('none')
+        store.dispatch(action)
+    }
     render() {
         return (
             <div>
                 <h1>hellow redux</h1>
                 <Button type="primary" onClick={this.goRedux}>跳转redux</Button>
+                <Button type="primary" onClick={this.goSaga}>saga使用</Button>
                 <Switch onChange={this.buttonChange}>改变button =》 list 的button</Switch>
                 <Select
                 defaultValue={this.state.selectValue}

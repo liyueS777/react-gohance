@@ -6,7 +6,7 @@ import '../../assets/css/user.less'
 import '../../assets/css/layout/index.css'
 
 import store from '../../store/index'
-import { getTodoData } from '../../store/actionsCreators'
+// import { getTodoData } from '../../store/actionsCreators'
 const { Header, Sider, Content } = Layout;
 
 class User extends React.Component {
@@ -26,11 +26,11 @@ class User extends React.Component {
         })
     }
     componentDidMount() {
-        const action = getTodoData();
-        console.log('User11111111',action,this.props)
+        // const action = getTodoData();
+        console.log('User11111111',this.props)
         //这里为什么可以是函数了
         //因为redux-thunk 的作用即是将 action 从一个对象变成一个函数
-        store.dispatch(action)
+        // store.dispatch(action)
         
     }
     toggle = () => {
