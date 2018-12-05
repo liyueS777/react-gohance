@@ -4,6 +4,9 @@ import { Route,Link} from 'react-router-dom'
 import { Layout, Menu, Icon,Switch } from 'antd';
 import '../../assets/css/user.less'
 import '../../assets/css/layout/index.css'
+
+import store from '../../store/index'
+import { getTodoData } from '../../store/actionsCreators'
 const { Header, Sider, Content } = Layout;
 
 class User extends React.Component {
@@ -11,18 +14,35 @@ class User extends React.Component {
         super(props);
         this.state = {
             collapsed: false,
+            checked:false
         };
     }
+    componentWillMount(){
+        store.subscribe(()=>{
+            console.log('sdd',store.getState())
+            this.setState(()=>({
+                checked:store.getState().buttonStatus
+            }))
+        })
+    }
     componentDidMount() {
-        console.log('User',this.props)
+        const action = getTodoData();
+        console.log('User11111111',action,this.props)
+        //这里为什么可以是函数了
+        //因为redux-thunk 的作用即是将 action 从一个对象变成一个函数
+        store.dispatch(action)
+        
     }
     toggle = () => {
         this.setState({
           collapsed: !this.state.collapsed,
         });
     }
-    onChange =(e)=>{
-        console.log(e)
+    onChange =(s)=>{
+        console.log('switch CCC',s)
+        this.setState((()=>({
+            checked:s
+        })))
     }
     render() {
         return (
@@ -39,7 +59,7 @@ class User extends React.Component {
                             <Link to="/user">
                                 <Icon type="user" className="floder" />
                                     <span>user
-                                        {/* <Switch defaultChecked onChange={this.onChange} /> */}
+                                        <Switch checked={this.state.checked} onChange={this.onChange} />
                                     </span>
                             </Link>
                         </Menu.Item>
@@ -50,12 +70,19 @@ class User extends React.Component {
                             </Link>
                         </Menu.Item>
                             
-                        <Menu.Item key="3">
-                            <Link to='/user/userDetail'>
-                                <Icon type="upload" />
-                                <span>userDetail</span>
-                            </Link>
-                        </Menu.Item>
+                            <Menu.Item key="3">
+                                <Link to='/user/userDetail'>
+                                    <Icon type="upload" />
+                                    <span>userDetail</span>
+                                </Link>
+                            </Menu.Item>
+                            
+                            <Menu.Item key="4">
+                                <Link to='/user/todoRedux2'>
+                                    <Icon type="upload" />
+                                    <span>todoRedux2</span>
+                                </Link>
+                            </Menu.Item>
                     </Menu>
                     </Sider>
                     <Layout>
