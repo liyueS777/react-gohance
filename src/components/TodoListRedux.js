@@ -13,13 +13,18 @@ class TodoRedux extends React.Component {
     componentWillMount(){
         console.log(store);
         store.subscribe(this.handleStoreChange)
-        this.state.r = store.getState()
+        this.setState(()=>{
+            return {
+                r:store.getState()
+            }
+        })
     }
     changeInputValue = (e) => {
         // const action = {
         //     type:CHANGE_INPUT_VALUE,
         //     value:e.target.value
         // }
+        //这里的
         store.dispatch(changeInputValue(e.target.value))
     }
     handleStoreChange = () => {

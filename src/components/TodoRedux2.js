@@ -1,8 +1,9 @@
 import React from 'react';
-import { Radio,Select,Button } from 'antd';
+import { Radio,Select,Button,Switch } from 'antd';
 import store2 from '../store/index'
 // import { CHANGE_SELECT_VALUE } from '../store/actionsType'
-import { changeSelectItem } from '../store/actionsCreators'
+import { changeSelectItem,changeButtonSwitch } from '../store/actionsCreators'
+import store from '../store/index';
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
 class TodoRedux2 extends React.Component {
@@ -60,7 +61,8 @@ class TodoRedux2 extends React.Component {
     handleProvinceChange = (p) =>{
         this.setState(()=>{
             return {
-                selectValue:p
+                selectValue:p,
+                checked:false
             }
         },()=>{
             console.log(this.state.selectValue);
@@ -86,11 +88,21 @@ class TodoRedux2 extends React.Component {
             search:'?a=2'
         })
     }
+    buttonChange = (checked) =>{
+        console.log(checked);
+        this.setState(()=>({
+            checked:checked
+        }),()=>{
+            store.dispatch(changeButtonSwitch(checked))
+        })
+        
+    }
     render() {
         return (
             <div>
                 <h1>hellow redux</h1>
                 <Button type="primary" onClick={this.goRedux}>跳转redux</Button>
+                <Switch onChange={this.buttonChange}>改变button =》 list 的button</Switch>
                 <Select
                 defaultValue={this.state.selectValue}
                 value={this.state.selectValue}

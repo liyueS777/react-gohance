@@ -1,12 +1,14 @@
 import {
     CHANGE_INPUT_VALUE,
     ADD_TOFO_ITEM,
-    CHANGE_SELECT_VALUE
+    CHANGE_SELECT_VALUE,
+    CHANGE_BUTTON_SWITCH
 } from "./actionsType";
 const defaultStore = {
     inputValue: '123',
     list: [1, 2, 3],
-    selectValue: ''
+    selectValue: '',
+    buttonStatus:false
 }
 
 export default (state = defaultStore, action) => {
@@ -27,6 +29,11 @@ export default (state = defaultStore, action) => {
             const tempState2 = JSON.parse(JSON.stringify(state))
             tempState2.selectValue = action.value
             return tempState2;
+            break;
+        case CHANGE_BUTTON_SWITCH:
+            const tempState3 = JSON.parse(JSON.stringify(state))
+            tempState3.buttonStatus = action.value
+            return tempState3;
             break;
         default:
             return state; // 这里的return state是要的，因为第一次有可能 不是空值也要同步到组件的state上
