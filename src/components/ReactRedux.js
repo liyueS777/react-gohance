@@ -1,6 +1,10 @@
 import React,{Component} from 'react'
 // import store from '../store'
 import { connect } from 'react-redux'
+import {
+    CSSTransition,
+    TransitionGroup,
+  } from 'react-transition-group';
 class ReactRedux extends Component {
     constructor(props){
         super(props)
@@ -22,6 +26,12 @@ class ReactRedux extends Component {
                 {/* {this.state.title}====={this.state.getDefault} */}
                 <input value={this.props.inputValue} onChange={this.props.inputChange} />
                 <button onClick={this.submit}>提交</button>
+                <CSSTransition
+                timeout={500}
+                classNames="fade"
+                >
+                    <div>AAA</div>
+                </CSSTransition>
             </div>
         )
     }
