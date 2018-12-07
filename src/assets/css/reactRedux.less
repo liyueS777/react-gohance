@@ -1,0 +1,33 @@
+.test {
+   // test-enter test-enter-active test-exit test-exit-active 
+//    transition:red 0.5s ease-in;
+}
+.u {
+    color:rgb(128, 105, 0);
+    border: 1px solid #000;
+    width: 100px;
+}
+.test-enter {
+    color:rgb(128, 105, 0);
+    width: 100px;
+    transition:color 1s ease-in,width 1s ease-out;
+    // transition:all 1.5s ease-out;
+}
+.test-enter-active {
+    color:pink;
+    width: 200px;
+}
+.test-exit {
+    transition:color 1s ease-out,width 1s ease-out;
+    // transition:all 1.5s ease-out;
+    width: 100px;
+
+}
+.test-exit-active {
+    color:rgb(128, 105, 0);
+    width: 100px;
+    transition:color 1s ease-out,width 1s ease-out;
+    // transition:all 1.5s ease-out;
+
+
+}

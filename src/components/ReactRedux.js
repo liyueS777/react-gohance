@@ -1,21 +1,30 @@
 import React,{Component} from 'react'
 // import store from '../store'
 import { connect } from 'react-redux'
+import '../assets/css/reactRedux.less'
 import {
     CSSTransition,
     TransitionGroup,
   } from 'react-transition-group';
+import { Button } from 'antd/lib/radio';
 class ReactRedux extends Component {
     constructor(props){
         super(props)
         this.state = {
             title:'hellow ReactRedux1',
             // getDefault:store.getState().default
+            toggle:false
         }
         
     }
-    submit = () =>{
-
+    toggle = (p) =>{
+        this.setState((prevS)=>{
+            return {
+                toggle:p
+            }
+        },()=>{
+            console.log(this.state.toggle)
+        })
     }
     inputChange = (e) =>{
         console.log(e.target.value)
@@ -25,12 +34,20 @@ class ReactRedux extends Component {
             <div>
                 {/* {this.state.title}====={this.state.getDefault} */}
                 <input value={this.props.inputValue} onChange={this.props.inputChange} />
-                <button onClick={this.submit}>提交</button>
+                <Button onClick={this.toggle.bind(this,true)}>开启</Button>
+                <Button onClick={this.toggle.bind(this,false)}>关闭</Button>
                 <CSSTransition
-                timeout={500}
-                classNames="fade"
+                in={this.state.toggle}
+                classNames="test"
+                onEntered={el => {
+                    //这个属性可以给动画播放完毕后的组件执行一次js函数
+                    // el.style.width = "120px";
+                    this.setState({toggle:false})
+                  }}
+                // test-enter test-enter-active test-exit test-exit-active
+                timeout={1000}
                 >
-                    <div>AAA</div>
+                    <input className="u"  />
                 </CSSTransition>
             </div>
         )
