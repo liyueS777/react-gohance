@@ -1,14 +1,7 @@
-const defaultState = {
-    default:'001',
-    inputValue:'hellow world'
-}
-export default (state = defaultState,action) =>{
-    if(action.type === 'change_input_value'){
-        const newState = JSON.parse(JSON.stringify(state));
-        newState.inputValue = action.value;
-        return newState
-    }else {
-        return state
-    }
-    
-}
+import { combineReducers } from 'redux'
+// import { combineReducers } from 'redux-immutable'
+import H1 from './reducerModule/H1'
+const reducer =  combineReducers({
+    input:H1
+});
+export default reducer

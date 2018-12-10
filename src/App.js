@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter as Router,Route,Link,Switch,Redirect } from 'react-router-dom'
-import routes from './routes/router'
+// import routes from './routes/router'
+import routes from './routes/routerReactLodable'
 //BrowserRouter  HashRouter
 import { Provider } from 'react-redux'
 import store from './store'

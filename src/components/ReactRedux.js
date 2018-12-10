@@ -1,6 +1,8 @@
 import React,{Component} from 'react'
 // import store from '../store'
 import { connect } from 'react-redux'
+// import { CHANGE_INPUT_VALUE,INPUT_BLUR,INPUT_FOCUS } from '../store/actionTypes'
+import {change_input_value,input_blur,input_focus,getList} from '../store/actionCreators'
 import '../assets/css/reactRedux.less'
 import {
     CSSTransition,
@@ -17,56 +19,79 @@ class ReactRedux extends Component {
         }
         
     }
-    toggle = (p) =>{
-        this.setState((prevS)=>{
-            return {
-                toggle:p
-            }
-        },()=>{
-            console.log(this.state.toggle)
-        })
-    }
-    inputChange = (e) =>{
-        console.log(e.target.value)
-    }
+    // toggle = (p) =>{
+    //     this.setState((prevS)=>{
+    //         return {
+    //             toggle:p
+    //         }
+    //     },()=>{
+    //         console.log(this.state.toggle)
+    //     })
+    // }
     render(){
+        console.log(111,this.props.input_status)
         return (
             <div>
                 {/* {this.state.title}====={this.state.getDefault} */}
                 <input value={this.props.inputValue} onChange={this.props.inputChange} />
-                <Button onClick={this.toggle.bind(this,true)}>开启</Button>
-                <Button onClick={this.toggle.bind(this,false)}>关闭</Button>
+                {/* <Button onClick={this.toggle.bind(this,true)}>开启</Button> */}
+                {/* <Button onClick={this.toggle.bind(this,false)}>关闭</Button> */}
                 <CSSTransition
-                in={this.state.toggle}
+                in={this.props.input_status}
                 classNames="test"
-                onEntered={el => {
-                    //这个属性可以给动画播放完毕后的组件执行一次js函数
-                    // el.style.width = "120px";
-                    this.setState({toggle:false})
-                  }}
+                // onEntered={el => {
+                //     //这个属性可以给动画播放完毕后的组件执行一次js函数
+                //     // el.style.width = "120px";
+                //     this.setState({toggle:false})
+                //   }}
                 // test-enter test-enter-active test-exit test-exit-active
                 timeout={1000}
                 >
-                    <input className="u"  />
+                    <input className="u"  onFocus={this.props.handleFoucus} onBlur={this.props.handleBlur} />
                 </CSSTransition>
+                <hr></hr>
+                <Button onClick={this.props.handleAddList}>dispatch add List</Button>
+                <hr></hr>
+                {
+                    this.props.list.map((v,k)=>{
+                        return (
+                            <h2 key={k}>{v.name}</h2>
+                        )
+                    })
+                }
             </div>
         )
     }
 }
 const mapStateToProps = (state) =>{
     return {
-        inputValue:state.inputValue
+        // // inputValue:state.inputValue,
+        // input_status:state.getIn(['input','input_status']),
+        // // input_status:state.get("input").get('input_status'),//使用immutable后要用set get方法
+        // list:state.get('input').get('iList'),//这里返回的是immutable  的数组或者对象
+
+
+        //不使用immutable
+        input_status:state.input.input_status,
+        list:state.input.iList,
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
         inputChange(e){
-            const action = {
-                type:'change_input_value',
-                value:e.target.value
-            }
-            console.log(action)
-            dispatch(action)
+            const action = change_input_value(e.target.value)
+            dispatch(action);
+        },
+        handleFoucus(){
+            const action = input_focus(true);
+            dispatch(action);
+        },
+        handleBlur(){
+            const action = input_blur(false);
+            dispatch(action);
+        },
+        handleAddList(){
+            dispatch(getList({name:'cc',id:5}))
         }
     }
 }
