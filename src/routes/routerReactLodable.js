@@ -14,28 +14,6 @@ const LoadableComponent2 = Loadable({
   loader: () => import('../components/async2'),
   loading
 });
- 
-// export default class App extends React.Component {
-//   render() {
-//     return <LoadableComponent/>;
-//   }
-// }
-
-// export default () => (<LoadableComponent />)
-
-// const Article = asyncComponent(() => import("../components/Article"));
-// const Home = asyncComponent(() => import("../components/Home"));
-// const News = asyncComponent(() => import("../components/News"));
-// const User = asyncComponent(() => import("../components/user/User"));
-// const UserAdd = asyncComponent(() => import("../components/user/UserAdd"));
-// const UserList = asyncComponent(() => import("../components/user/UserList"));
-// const UserDetail = asyncComponent(() => import("../components/user/UserDetail"));
-// const TodoList = asyncComponent(() => import("../components/TodoList"));
-// const TodoRedux = asyncComponent(() => import("../components/TodoListRedux"));
-// const Transition = asyncComponent(() => import("../components/Transition"));
-// const TodoRedux2 = asyncComponent(() => import("../components/TodoRedux2"));
-// const TodoListUI = asyncComponent(() => import("../components/TodoListUI"));
-// const ReactRedux = asyncComponent(() => import("../components/ReactRedux"));
 
 const routes = [
     {

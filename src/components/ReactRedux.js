@@ -3,6 +3,7 @@ import React,{Component} from 'react'
 import { connect } from 'react-redux'
 // import { CHANGE_INPUT_VALUE,INPUT_BLUR,INPUT_FOCUS } from '../store/actionTypes'
 import {change_input_value,input_blur,input_focus,getList} from '../store/actionCreators'
+import { Link } from 'react-router-dom'
 import '../assets/css/reactRedux.less'
 import {
     CSSTransition,
@@ -28,6 +29,12 @@ class ReactRedux extends Component {
     //         console.log(this.state.toggle)
     //     })
     // }
+    goR = () => {
+        this.props.history.push({
+            pathname:'/r2',
+            search:'?a=2&c=3'
+        })
+    }
     render(){
         console.log(111,this.props.input_status)
         return (
@@ -50,6 +57,8 @@ class ReactRedux extends Component {
                     <input className="u"  onFocus={this.props.handleFoucus} onBlur={this.props.handleBlur} />
                 </CSSTransition>
                 <hr></hr>
+                <button onClick={this.goR}>go R2</button>
+                <Link to="/r2?a=5">go RRR</Link>
                 <Button onClick={this.props.handleAddList}>dispatch add List</Button>
                 <hr></hr>
                 {
