@@ -2,6 +2,7 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 // import Loading from './my-loading-component';
+import NotFind from '../components/NotFind'
 
 const loading = function(){
     return (<div>正在加载中...</div>)
@@ -14,7 +15,6 @@ const LoadableComponent2 = Loadable({
   loader: () => import('../components/async2'),
   loading
 });
-
 const routes = [
     {
         path:'/',
@@ -36,6 +36,13 @@ const routes = [
         component:LoadableComponent2,
         meta:{
             title:'r2'
+        }
+    },   
+    {
+        path:'/404',
+        component:NotFind,
+        meta:{
+            title:'404'
         }
     },  
     // {

@@ -18,34 +18,33 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
-          <div id="app">
-              {/* <div className="App">
-                <h1>{this.state.title}</h1>
-                <hr/>
-                <Link to="/">首页</Link>&nbsp;&nbsp;
-                <Link to="/news">新闻</Link>&nbsp;&nbsp;
-                <Link to="/article">文章</Link>&nbsp;&nbsp;
-              </div> */}
-              {
-                routes.map((route,key)=>{
-                  if(route.exact){
-                    return <Route key={key} path={route.path} exact render={
-                      props =>
-                      (<route.component {...props} routes={route.routes} />)
-                    }
-                    />
-                  }else {
-                    return <Route key={key} path={route.path} render={
-                      props =>
-                      (<route.component {...props} routes={route.routes} />)
-                    }
-                    />
+        
+          <Router>
+            <div id="app">
+                <Switch>
+                  {
+                    routes.map((route,key)=>{
+                      if(route.exact){
+                        return <Route key={key} path={route.path} exact render={
+                          props =>
+                          (<route.component {...props} routes={route.routes} />)
+                        }
+                        />
+                      }else {
+                        return <Route key={key} path={route.path} render={
+                          props =>
+                          (<route.component {...props} routes={route.routes} />)
+                        }
+                        />
+                      }
+                    })
                   }
-                })
-              }
+                  <Route render={() => <Redirect to="/404" />} />
+                </Switch>
+                
             </div>
           </Router>
+
       </Provider>
     );
   }
