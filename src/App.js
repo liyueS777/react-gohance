@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router,Route,Link,Switch,Redirect } from 'react-router-dom'
+import { HashRouter as Router,Route,Link,Switch,Redirect,withRouter } from 'react-router-dom'
 // import routes from './routes/router'
 import routes from './routes/routerReactLodable'
 //BrowserRouter  HashRouter
@@ -11,9 +11,17 @@ class App extends Component {
     this.state = {
       title:"我是app的title"
     }
+    window.addEventListener('hashchange', (r) => {
+      console.log(1,window.navigator)
+    })
+
   }
-  componentDidMount(){
-    console.log('我是app的Mount')
+  setTitle = (t) =>{
+    console.log(678,t)
+    document.title = t
+  }
+  componentWillMount(){
+    console.log('我是app的Mount',this.props)
   }
   render() {
     return (
@@ -25,15 +33,15 @@ class App extends Component {
                   {
                     routes.map((route,key)=>{
                       if(route.exact){
-                        return <Route key={key} path={route.path} exact render={
+                        return <Route key={key}  path={route.path} exact render={
                           props =>
-                          (<route.component {...props} routes={route.routes} />)
+                          (<route.component {...props} meta={route.meta} onEnter={()=> this.setTitle.bind(this,route.meta.title)} routes={route.routes}  />)
                         }
                         />
                       }else {
-                        return <Route key={key} path={route.path} render={
+                        return <Route key={key} path={route.path}  render={
                           props =>
-                          (<route.component {...props} routes={route.routes} />)
+                          (<route.component {...props} meta={route.meta} onEnter={() => this.setTitle.bind(this,route.meta.title)}  routes={route.routes} />)
                         }
                         />
                       }
@@ -43,8 +51,8 @@ class App extends Component {
                 </Switch>
                 
             </div>
-          </Router>
 
+          </Router>
       </Provider>
     );
   }

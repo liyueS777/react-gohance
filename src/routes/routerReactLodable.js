@@ -3,9 +3,10 @@ import React from 'react';
 import Loadable from 'react-loadable';
 // import Loading from './my-loading-component';
 import NotFind from '../components/NotFind'
-
+import timing from '../assets/images/timg.gif'
+import '../assets/css/loading.less'
 const loading = function(){
-    return (<div>正在加载中...</div>)
+    return (<div className="loadingg"><img src={timing} /></div>)
 }
 const LoadableComponent = Loadable({
   loader: () => import('../components/ReactRedux'),

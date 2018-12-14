@@ -1,4 +1,9 @@
 import React,{Component} from 'react'
+import { withRouter } from 'react-router-dom'//加入这个是为了使用异步组件的时候确保所有属性方法给到异步后的组件里面去
+
+
+// import simpleHoc from './HighC'
+
 // import store from '../store'
 import { connect } from 'react-redux'
 // import { CHANGE_INPUT_VALUE,INPUT_BLUR,INPUT_FOCUS } from '../store/actionTypes'
@@ -9,7 +14,11 @@ import {
     CSSTransition,
     TransitionGroup,
   } from 'react-transition-group';
-import { Button } from 'antd/lib/radio';
+import { Button,Input } from 'antd';
+
+
+
+// @simpleHoc
 class ReactRedux extends Component {
     constructor(props){
         super(props)
@@ -29,6 +38,13 @@ class ReactRedux extends Component {
     //         console.log(this.state.toggle)
     //     })
     // }
+    componentWillMount(){
+        console.log('rredux',this.props);
+        this.props.onEnter()()
+        return
+        document.title = this.props.meta.title
+    
+    }
     goR = () => {
         this.props.history.push({
             pathname:'/r2',
@@ -40,7 +56,7 @@ class ReactRedux extends Component {
         return (
             <div>
                 {/* {this.state.title}====={this.state.getDefault} */}
-                <input value={this.props.inputValue} onChange={this.props.inputChange} />
+                <Input value={this.props.inputValue} onChange={this.props.inputChange} />
                 {/* <Button onClick={this.toggle.bind(this,true)}>开启</Button> */}
                 {/* <Button onClick={this.toggle.bind(this,false)}>关闭</Button> */}
                 <CSSTransition
@@ -104,4 +120,5 @@ const mapDispatchToProps = (dispatch) =>{
         }
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(ReactRedux)
+// export default connect(mapStateToProps,mapDispatchToProps)(ReactRedux)
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(ReactRedux))
